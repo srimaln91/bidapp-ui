@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import * as io from 'socket.io-client';
 import { Property } from '../../classes/property';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class PropertyService {
@@ -11,7 +12,7 @@ export class PropertyService {
   todos: Property[] = [];
   id: number;
 
-  apiBase = 'http://localhost:3100';
+  apiBase = environment.apiEndpoint;
   headers: Headers;
   options: RequestOptions;
   private socket;
@@ -30,7 +31,7 @@ export class PropertyService {
 
   getProperties(propertyId = null): Promise<Property[]> {
 
-    const endpoint = (propertyId == null) ? `${this.apiBase}/property` : `${this.apiBase}/property/` + propertyId;
+    const endpoint = (propertyId == null) ? `${this.apiBase}property` : `${this.apiBase}property/` + propertyId;
 
     return this.http.get(endpoint, { headers: this.headers })
       .toPromise()
@@ -41,7 +42,7 @@ export class PropertyService {
 
   submitBid(propertyId, userId, value): Promise<any> {
 
-    const endpoint = `${this.apiBase}/bids`;
+    const endpoint = `${this.apiBase}bids`;
 
     return this.http.post(endpoint, JSON.stringify({ 'propertyId': propertyId, 'userId': userId, 'value': value }), this.options)
       .toPromise()

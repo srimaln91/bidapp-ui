@@ -3,11 +3,12 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { User } from '../../classes/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
 
-  private apiBase = 'http://localhost:3100/auth/';
+  private apiBase = environment.apiEndpoint + 'auth/';
   private headers: Headers;
   private options: RequestOptions;
   private token: string;

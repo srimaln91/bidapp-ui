@@ -4,6 +4,7 @@ import { PropertyService } from '../../services/property/property.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Property } from '../../classes/property';
 import * as io from 'socket.io-client';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-bid-detail',
@@ -34,7 +35,7 @@ export class BidDetailComponent implements OnInit {
     });
 
     const user = JSON.parse(localStorage.getItem('currentUser'));
-    this.socket = io('http://localhost:3100', { query: 'access_token=' + user.token });
+    this.socket = io(environment.apiEndpoint, { query: 'access_token=' + user.token });
 
     const that = this;
     this.socket.on('reload', function (data) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-count',
@@ -16,8 +17,8 @@ export class UserCountComponent implements OnInit {
   }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    this.socket = io('http://localhost:3100', { query: 'access_token=' + user.token });
+
+    this.socket = io(environment.apiEndpoint);
 
     const that = this;
     this.socket.on('user-connected', function (data) {
