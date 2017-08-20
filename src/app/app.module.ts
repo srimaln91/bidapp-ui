@@ -12,13 +12,15 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { BidDetailComponent } from './components/bid-detail/bid-detail.component';
 import { CurrencyPipe } from '@angular/common';
+import { UserCountComponent } from './components/user-count/user-count.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    BidDetailComponent
+    BidDetailComponent,
+    UserCountComponent
   ],
   imports: [
     BrowserModule,
