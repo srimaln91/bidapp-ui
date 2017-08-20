@@ -4,24 +4,44 @@
 
             <div class="row property-element">
               <div class="col-sm-3 property-image">
-                  <img class="img-responsive" alt="test" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" />
+                  <img class="img-responsive" alt="test" src="https://lid.zoocdn.com/645/430/2a848e5cfdbd75c1507248295c5a7d9a837df386.jpg" />
               </div>
               <div class="col-sm-6">
                 <div>
                   <h2 class="title">{{ property.title }}</h2>
                   <p class="desc"> {{ property.address }}</p>
                   <ul class="prop-footer">
-                    <li> Start Bid : {{ property.startBid }} USD</li>
+                    <li> Start Bid : {{ property.startBid | currency:'USD':true:'4.2-2' }}</li>
                   </ul>
                 </div>
               </div>
-              <div class="col-sm-3 best-bid">
+              <div class="col-sm-3">
                 <div class="value">
-                  <p>{{ property.bids[0].value }} USD</p>
-                  <input name="newbid" [(ngModel)]="bidValue">
-                  <button (click)="submitBid()">Place Bid</button>
+                  <p class="best-bid">{{ property.bids[0].value | currency:'USD':true:'4.2-2' }} </p>
+                  <div class="panel newbid-box" style="padding:10px">
+                    <input class="form-control" name="newbid" [(ngModel)]="bidValue">
+                    <button class="btn btn-default pull-right" (click)="submitBid()">Place a Bid</button>
+                  </div>
                 </div>
               </div>
+            </div>
+
+            <div class="row">
+                <h2>Bid Details</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let bid of property.bids">
+                      <td>{{bid.date}}</td>
+                      <td>{{bid.value | currency:'USD':true:'4.2-2' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
 
       </div>

@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { BidDetailComponent } from './components/bid-detail/bid-detail.component';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,9 @@ import { BidDetailComponent } from './components/bid-detail/bid-detail.component
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  providers: [ AuthenticationService, PropertyService, AuthGuard ],
+  providers: [ AuthenticationService, PropertyService, AuthGuard, CurrencyPipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
-
+import * as io from 'socket.io-client';
 import { Property } from '../../classes/property';
 
 @Injectable()
@@ -14,6 +14,7 @@ export class PropertyService {
   apiBase = 'http://localhost:3100';
   headers: Headers;
   options: RequestOptions;
+  private socket;
 
   constructor(private http: Http, private router: Router) {
     const user = JSON.parse(localStorage.getItem('currentUser'));
@@ -24,6 +25,7 @@ export class PropertyService {
     });
     this.options = new RequestOptions({ headers: this.headers });
 
+    this.socket = io(this.apiBase, {query: 'access_token=' + user.token });
   }
 
   getProperties(propertyId = null): Promise<Property[]> {

@@ -1,3 +1,6 @@
 .login-link {
     float: right;
 }
+.top-links > a {
+    padding: 10px;
+}

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../services/property/property.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Property } from '../../classes/property';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-bid-detail',
@@ -14,6 +15,7 @@ export class BidDetailComponent implements OnInit {
   private property: any;
   private sub: any;
   private bidValue;
+  private socket;
 
   constructor(
     private propertyService: PropertyService,
@@ -30,12 +32,33 @@ export class BidDetailComponent implements OnInit {
         .then(property => this.property = property);
 
     });
+
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    this.socket = io('http://localhost:3100', { query: 'access_token=' + user.token });
+
+    const that = this;
+    this.socket.on('reload', function (data) {
+
+      that.propertyService.getProperties(that.property._id)
+        .then(property => that.property = property);
+    });
+
   }
 
   submitBid() {
+    const that = this;
+    if (this.bidValue === '') {
+      alert('Invalid value.');
+      return;
+    }else if (this.bidValue) {
 
+    }
     this.propertyService.submitBid(this.property._id, this.authenticationService.getUserId, this.bidValue)
-    .then(property => this.property = property);
+      .then(function (property) {
+        that.property = property;
+        that.socket.emit('new-bid');
+        that.bidValue = '';
+      });
   }
 
 }

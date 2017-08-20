@@ -1,0 +1,22 @@
+.prop-footer {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.best-bid {
+    font-size: 35px;
+    text-align: center;
+    padding: 25px;
+}
+
+.newbid-box {
+    background-color: mediumseagreen;
+    width: fit-content;
+    padding: 21px;
+    height: 100px;
+}
+
+.newbid-box > button {
+    margin-top: 5px;
+}

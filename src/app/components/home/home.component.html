@@ -5,7 +5,7 @@
         <li *ngFor="let property of properties">
           <div class="row property-element">
             <div class="col-sm-3 property-image">
-                <img class="img-responsive" alt="test" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" />
+                <img class="img-responsive" alt="test" src="https://lid.zoocdn.com/645/430/2a848e5cfdbd75c1507248295c5a7d9a837df386.jpg" />
             </div>
             <div class="col-sm-6">
               <div>
@@ -18,10 +18,10 @@
             </div>
             <div class="col-sm-3 best-bid">
               <div class="value">
-                <p>{{ property.bids[0].value }} USD</p>
+                <p>{{ property.bids[0].value | currency:'USD':true:'4.2-2' }}</p>
               </div>
               <div class="more-details">
-                <a class="btn btn-default" [routerLink]="['/property', property._id]">Details</a>
+                <a class="btn btn-default" [routerLink]="['/property', property._id]">More Details >></a>
               </div>
             </div>
           </div>
