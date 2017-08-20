@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+
+            <div class="row property-element">
+              <div class="col-sm-3 property-image">
+                  <img class="img-responsive" alt="test" src="https://farm5.staticflickr.com/4150/5045502202_1d867c8a41_q.jpg" />
+              </div>
+              <div class="col-sm-6">
+                <div>
+                  <h2 class="title">{{ property.title }}</h2>
+                  <p class="desc"> {{ property.address }}</p>
+                  <ul class="prop-footer">
+                    <li> Start Bid : {{ property.startBid }} USD</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-sm-3 best-bid">
+                <div class="value">
+                  <p>{{ property.bids[0].value }} USD</p>
+                  <input name="newbid" [(ngModel)]="bidValue">
+                  <button (click)="submitBid()">Place Bid</button>
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
