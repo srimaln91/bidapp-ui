@@ -51,8 +51,9 @@ export class BidDetailComponent implements OnInit {
     if (this.bidValue === '') {
       alert('Invalid value.');
       return;
-    }else if (this.bidValue) {
-
+    }else if (parseFloat(this.bidValue) <= this.property.startBid) {
+      alert('You should always use a value grater than the initial bid!');
+      return;
     }
     this.propertyService.submitBid(this.property._id, this.authenticationService.getUserId, this.bidValue)
       .then(function (property) {
