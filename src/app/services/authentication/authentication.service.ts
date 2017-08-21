@@ -4,6 +4,7 @@ import { User } from '../../classes/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthenticationService {
@@ -35,6 +36,7 @@ export class AuthenticationService {
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(response.json()));
+          localStorage.setItem('id_token', token );
 
           // return true to indicate successful login
           return true;
@@ -57,12 +59,10 @@ export class AuthenticationService {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('id_token');
   }
 
   isLoggedIn(): boolean {
-    if (JSON.parse(localStorage.getItem('currentUser')).token) {
-      return true;
-    }
-    return false;
+    return tokenNotExpired('id_token');
   }
 }
